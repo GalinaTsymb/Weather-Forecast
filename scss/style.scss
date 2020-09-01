@@ -1,0 +1,68 @@
+@import "components/WeatherView";
+@import "layout/search-form";
+
+
+* {
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+input {
+  margin: 0;
+  list-style: none;
+  outline: none;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+  list-style: none;
+}
+
+a:active,
+a:hover,
+{
+  outline: none;
+  text-decoration: none;
+  list-style: none;
+
+}
+
+button {
+  outline: none;
+}
+
+

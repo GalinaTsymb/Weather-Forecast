@@ -1,0 +1,98 @@
+@import "../tools/customization";
+
+
+.weather-show {
+  background: linear-gradient(135deg, $color-bc-1 0, $color-bc-2 100%);
+  @include widthHeight(100%, 100vh);
+
+  &__title {
+    @include text($size-46, $line-height-48, $lato, $font-weight-700, $color-light-blue, center) {
+      padding-top: 1.5rem;
+    }
+  }
+
+  &__animated {
+    @extend %flexColumn;
+    @include widthHeight(700px, 400px);
+    border-radius: 10px;
+    border: $border-4;
+    background: $color-bc-2;
+    margin: 4rem auto;
+  }
+
+  &__date {
+    @include text($size-18, $line-height-34, $lato, $font-weight-700, $color-light-blue, center);
+  }
+
+  &__location {
+    @include text($size-26, $line-height-30, $lato, $font-weight-700, $color-light-blue, center);
+  }
+}
+
+.weather-box {
+  @include flexRowCenter(1.5rem);
+
+  &__icon {
+    display: block;
+    width: 10%;
+  }
+
+  &__temp-text {
+    @include text($size-30, $line-height-34, $lato, $font-weight-700, $color-white, start);
+  }
+
+  &__temp-gradus {
+    @include text($size-30, $line-height-34, $lato, $font-weight-700, $color-white, start);
+    display: none;
+  }
+
+  &__temp-gradus.active {
+    display: contents;
+  }
+
+  &__description-inner {
+    display: none;
+  }
+
+  &__description-inner.active {
+    display: block;
+  }
+
+  &__description-text {
+    @include text;
+  }
+}
+
+.weather-future {
+  @include flexRowCenter(2rem);
+
+  &__item-description {
+    @include text;
+  }
+
+  &__item-temp {
+    @include text;
+  }
+
+  &__item-gradus {
+    display: none;
+    @include text;
+  }
+
+  &__item-gradus.active {
+    display: contents;
+  }
+}
+#result{
+  display: none;
+  background:#fff;
+  //width:175px;
+  box-shadow:0 0 20px 0 rgba(0,0,0,0.5);
+}
+.list:hover{
+  background:#f5f5f5;
+  cursor:pointer;
+}
+#result.active{
+  display: block;
+}

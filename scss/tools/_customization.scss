@@ -1,0 +1,6 @@
+@import "mixins";
+
+%flexColumn{
+  display: flex;
+  flex-direction: column;
+}

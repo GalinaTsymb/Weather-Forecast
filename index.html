@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Spartan&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/style.css">
+</head>
+<body>
+<section class="weather-show">
+    <h1 class="weather-show__title">WEATHER FORECAST</h1>
+    <div class="weather-show__animated">
+        <form class="search-form js-weather-request-form">
+            <div>
+                <input id="js-search-location" class="search-form__enter"  type="search" name="new-location"
+                       autocomplete='off' placeholder="Kyiv, Mykolayiv"/>
+
+                <input class="search-form__button" type="submit" value="Get forecast for new location"/>
+            </div>
+            <select id='result' size="4"></select>
+        </form>
+        <p class="weather-show__date js-current-date"></p>
+        <p class="weather-show__location js-location-country"></p>
+        <div class="weather-box">
+            <img src="" class="weather-box__icon js-current-icon">
+            <div class="weather-box__temp-inner">
+                <span class="weather-box__temp-text js-current-temp"></span>
+                <span class="weather-box__temp-gradus js-temp-gradus">&#176;C</span>
+            </div>
+            <div class="weather-box__description-inner js-description-inner">
+                <p>
+                    <span class="weather-box__description-text">Wind:</span>
+                    <span class="weather-box__description-text js-current-wind"> </span>
+                    <span class="weather-box__description-text">kmph</span>
+                </p>
+                <p>
+                    <span class="weather-box__description-text">Humidity:</span>
+                    <span class="weather-box__description-text js-current-precip"> </span>
+                    <span class="weather-box__description-text">%</span>
+                </p>
+                <p>
+                    <span class="weather-box__description-text">Pressure:</span>
+                    <span class="weather-box__description-text js-current-pressure"> </span>
+                    <span class="weather-box__description-text">mb</span>
+                </p>
+            </div>
+        </div>
+        <ul class="weather-future" id="future_weather">
+            <li class="weather-future__item">
+                <span class="weather-future__item-description js-future-date"></span>
+                <figure><img class="js-future-icon"></figure>
+                <span class="weather-future__item-temp js-future-temp"></span>
+                <span class="weather-future__item-gradus js-future-gradus">&#176;C</span>
+            </li>
+            <li class="weather-future__item">
+                <span class="weather-future__item-description js-future-date"></span>
+                <figure><img class="js-future-icon"></figure>
+                <span class="weather-future__item-temp js-future-temp"></span>
+                <span class="weather-future__item-gradus js-future-gradus">&#176;C</span>
+            </li>
+            <li class="weather-future__item">
+                <span class="weather-future__item-description js-future-date"></span>
+                <figure><img class="js-future-icon"></figure>
+                <span class="weather-future__item-temp js-future-temp"></span>
+                <span class="weather-future__item-gradus js-future-gradus">&#176;C</span>
+            </li>
+            <li class="weather-future__item">
+                <span class="weather-future__item-description js-future-date"></span>
+                <figure><img class="js-future-icon"></figure>
+                <span class="weather-future__item-temp js-future-temp"></span>
+                <span class="weather-future__item-gradus js-future-gradus">&#176;C</span>
+            </li>
+            <li class="weather-future__item">
+                <span class="weather-future__item-description js-future-date"></span>
+                <figure><img class="js-future-icon"></figure>
+                <span class="weather-future__item-temp js-future-temp"></span>
+                <span class="weather-future__item-gradus js-future-gradus">&#176;C</span>
+            </li>
+            <li class="weather-future__item">
+                <span class="weather-future__item-description js-future-date"></span>
+                <figure><img class="js-future-icon"></figure>
+                <span class="weather-future__item-temp js-future-temp"></span>
+                <span class="weather-future__item-gradus js-future-gradus">&#176;C</span>
+            </li>
+            <li class="weather-future__item">
+                <span class="weather-future__item-description js-future-date"></span>
+                <figure><img class="js-future-icon"></figure>
+                <span class="weather-future__item-temp js-future-temp"></span>
+                <span class="weather-future__item-gradus js-future-gradus">&#176;C</span>
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+<script type="module" src="assets/js/script.js" async></script>
+</body>
+</html>
