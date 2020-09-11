@@ -119,7 +119,6 @@ const getCurrentTimeFromStamp = function (timestamp) {
  * @param location
  * @param weather_box
  * @return {Promise.<void>}
- * fbef056026b1609515d49ab0bb9fc291
  */
 const weather_request = async () => {
 
