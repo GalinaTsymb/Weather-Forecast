@@ -26,8 +26,6 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "dotenv-expand": "^5.1.0",
     "gulp-autoprefixer": "^7.0.1",
     "normalize.css": "^8.0.1"
   }

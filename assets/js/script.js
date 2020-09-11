@@ -48,16 +48,58 @@ var FUTURE_GRADUS = document.querySelectorAll(".js-future-gradus");
 var ukraineCity = [];
 var lat;
 var lon;
+var api_key = "";
+/**
+ * get API from file, which is in gitignore
+ * @returns {Promise<void>}
+ * @constructor
+ */
+
+var REQUEST_API_KEY = /*#__PURE__*/function () {
+  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+    return _regenerator["default"].wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            fetch('/weather/key.json').then(function (response) {
+              if (response.status !== 200) {
+                console.log('Looks like there was a problem. Status Code: ' + response.status);
+                return;
+              }
+
+              response.json().then(function (data) {
+                for (var i = 0; i < data.length; i++) {
+                  if (data[i].name === "MY_KEY") {
+                    api_key = data[i].key;
+                  }
+                }
+              });
+            });
+
+          case 1:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function REQUEST_API_KEY() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+var requestApi = REQUEST_API_KEY();
 /**
  * performs request to json file and get base of cities, then filter ukraine's cities and create option in select
  * @returns {Promise<void>}
  */
 
 var cityRequest = /*#__PURE__*/function () {
-  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-    return _regenerator["default"].wrap(function _callee$(_context) {
+  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
-        switch (_context.prev = _context.next) {
+        switch (_context2.prev = _context2.next) {
           case 0:
             fetch('/weather/city.list.json').then(function (response) {
               if (response.status !== 200) {
@@ -77,14 +119,14 @@ var cityRequest = /*#__PURE__*/function () {
 
           case 1:
           case "end":
-            return _context.stop();
+            return _context2.stop();
         }
       }
-    }, _callee);
+    }, _callee2);
   }));
 
   return function cityRequest() {
-    return _ref.apply(this, arguments);
+    return _ref2.apply(this, arguments);
   };
 }();
 
@@ -137,20 +179,21 @@ var getCurrentTimeFromStamp = function getCurrentTimeFromStamp(timestamp) {
  * @param location
  * @param weather_box
  * @return {Promise.<void>}
+ * fbef056026b1609515d49ab0bb9fc291
  */
 
 
 var weather_request = /*#__PURE__*/function () {
-  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
-    return _regenerator["default"].wrap(function _callee2$(_context2) {
+  var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3() {
+    return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            fetch("https://api.openweathermap.org/data/2.5/onecall?lat=".concat(lat, "&lon=").concat(lon, "&units=metric&lang=ru&appid=fbef056026b1609515d49ab0bb9fc291")).then(function (response) {
+            fetch("https://api.openweathermap.org/data/2.5/onecall?lat=".concat(lat, "&lon=").concat(lon, "&units=metric&lang=ru&appid=").concat(api_key)).then(function (response) {
               return response.json();
             }).then(function (response) {
-              var data = response;
-              console.log(data);
+              var data = response; //console.log(data);
+
               WEATHER_ICON.src = "http://openweathermap.org/img/w/".concat(data.current.weather[0].icon, ".png");
               CURRENT_DATA.innerHTML = getCurrentTimeFromStamp(data.current.dt);
               TEMPERATURE.innerHTML = Math.floor(data.current.temp);
@@ -158,8 +201,8 @@ var weather_request = /*#__PURE__*/function () {
               WIND.innerHTML = data.current.wind_speed;
               PRECIP.innerHTML = data.current.humidity;
               PRESSURE.innerHTML = data.current.pressure;
-              DESCRIPTION_WEATHER.classList.add('active');
-              console.log('id', data.current.weather[0].id);
+              DESCRIPTION_WEATHER.classList.add('active'); //console.log('id', data.current.weather[0].id);
+
               data.daily.forEach(function (item, index) {
                 FUTURE_DATA[index].innerHTML = getCurrentTimeFromStamp(data.daily[index + 1].dt);
                 FUTURE_ICON[index].src = "http://openweathermap.org/img/w/".concat(data.daily[index + 1].weather[0].icon, ".png");
@@ -172,14 +215,14 @@ var weather_request = /*#__PURE__*/function () {
 
           case 1:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
       }
-    }, _callee2);
+    }, _callee3);
   }));
 
   return function weather_request() {
-    return _ref2.apply(this, arguments);
+    return _ref3.apply(this, arguments);
   };
 }();
 /**
@@ -195,7 +238,7 @@ WEATHER_REQUEST_FORM && WEATHER_REQUEST_FORM.addEventListener('submit', function
 
   for (var i = 0; i < ukraineCity.length; i++) {
     if (ukraineCity[i].name === newLocation) {
-      console.log('my city', ukraineCity[i]);
+      //console.log('my city', ukraineCity[i]);
       lat = ukraineCity[i].coord.lat;
       lon = ukraineCity[i].coord.lon;
     }

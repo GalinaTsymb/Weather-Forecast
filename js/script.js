@@ -1,4 +1,4 @@
-require('dotenv').config();
+
 import {create_option} from "./helpers";
 
 const INPUT_SEARCH_LOCATION         = document.getElementById('js-search-location');
@@ -22,6 +22,31 @@ const FUTURE_GRADUS                 = document.querySelectorAll(".js-future-grad
 let ukraineCity = [];
 let lat;
 let lon;
+let api_key = "";
+/**
+ * get API from file, which is in gitignore
+ * @returns {Promise<void>}
+ * @constructor
+ */
+const REQUEST_API_KEY = async ()=>{
+    fetch('/weather/key.json')
+        .then(
+            function (response) {
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                    return;
+                }
+                response.json().then(function (data){
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].name === "MY_KEY") {
+                            api_key = data[i].key;
+                        }
+                    }
+                })
+            })
+};
+const requestApi = REQUEST_API_KEY();
 
 /**
  * performs request to json file and get base of cities, then filter ukraine's cities and create option in select
@@ -94,15 +119,16 @@ const getCurrentTimeFromStamp = function (timestamp) {
  * @param location
  * @param weather_box
  * @return {Promise.<void>}
+ * fbef056026b1609515d49ab0bb9fc291
  */
 const weather_request = async () => {
 
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=fbef056026b1609515d49ab0bb9fc291`)
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${api_key}`)
 
         .then(response => response.json())
         .then(response => {
             let data = response;
-            console.log(data);
+            //console.log(data);
             WEATHER_ICON.src            = `http://openweathermap.org/img/w/${data.current.weather[0].icon}.png`;
             CURRENT_DATA.innerHTML      = getCurrentTimeFromStamp(data.current.dt);
             TEMPERATURE.innerHTML       = Math.floor(data.current.temp);
@@ -111,7 +137,7 @@ const weather_request = async () => {
             PRECIP.innerHTML            = data.current.humidity;
             PRESSURE.innerHTML          = data.current.pressure;
             DESCRIPTION_WEATHER.classList.add('active');
-            console.log('id', data.current.weather[0].id);
+            //console.log('id', data.current.weather[0].id);
 
             data.daily.forEach(function (item, index) {
                 FUTURE_DATA[index].innerHTML    = getCurrentTimeFromStamp(data.daily[index + 1].dt);
@@ -135,7 +161,7 @@ const weather_request = async () => {
     for (let i = 0; i < ukraineCity.length; i++) {
 
         if (ukraineCity[i].name === newLocation) {
-            console.log('my city', ukraineCity[i]);
+            //console.log('my city', ukraineCity[i]);
             lat = ukraineCity[i].coord.lat;
             lon = ukraineCity[i].coord.lon;
         }
